@@ -916,7 +916,22 @@
     const email=document.getElementById('femail').value.trim();
     const attending=document.getElementById('fattending').value;
     if(!name||!email||!attending){alert('Hey! Fill in your name, email, and whether you can make it 😊');return;}
-    // Connect Google Form here — see comments in previous version
+    // ── CONNECT YOUR GOOGLE FORM ─────────────────────────────────────────
+    // 1. Create a Google Form (Name, Email, Attending, Guests, Message)
+    // 2. Open the prefill link, fill dummy data, copy the URL
+    // 3. Replace YOUR_FORM_ID and each entry.XXXXXXXXX with your real IDs
+    // 4. Remove the // from the lines below to activate
+    //
+    // const body = new URLSearchParams({
+    //   'entry.XXXXXXXXX': name,
+    //   'entry.XXXXXXXXX': email,
+    //   'entry.XXXXXXXXX': attending,
+    //   'entry.XXXXXXXXX': document.getElementById('fguests').value,
+    //   'entry.XXXXXXXXX': document.getElementById('fmessage').value,
+    // });
+    // fetch('https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse',
+    //       { method: 'POST', body, mode: 'no-cors' });
+    // ─────────────────────────────────────────────────────────────────────
     document.getElementById('rsvp-form').style.display='none';
     document.getElementById('success-msg').style.display='block';
     burst(window.innerWidth/2,window.innerHeight/2,120);
