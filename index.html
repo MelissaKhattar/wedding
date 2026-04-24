@@ -922,15 +922,15 @@
     // 3. Replace YOUR_FORM_ID and each entry.XXXXXXXXX with your real IDs
     // 4. Remove the // from the lines below to activate
     //
-    // const body = new URLSearchParams({
-    //   'entry.1209174974': name,
-    //   'entry.863709102': email,
-    //   'entry.940587516': attending,
-    //   'entry.73533832': document.getElementById('fguests').value,
-    //   'entry.1533862517': document.getElementById('fmessage').value,
-    // });
-    // fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjuwEvltYfFicphtxaKYcvDDoKemOzdfLKrkbm5vKopLk8Bw/formResponse',
-    //       { method: 'POST', body, mode: 'no-cors' });
+    const body = new URLSearchParams({
+      'entry.1209174974': name,
+      'entry.863709102': email,
+      'entry.940587516': attending,
+      'entry.73533832': document.getElementById('fguests').value,
+      'entry.1533862517': document.getElementById('fmessage').value,
+    });
+     fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjuwEvltYfFicphtxaKYcvDDoKemOzdfLKrkbm5vKopLk8Bw/formResponse',
+           { method: 'POST', body, mode: 'no-cors' });
     // ─────────────────────────────────────────────────────────────────────
     document.getElementById('rsvp-form').style.display='none';
     document.getElementById('success-msg').style.display='block';
