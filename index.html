@@ -922,18 +922,17 @@
     // 3. Replace YOUR_FORM_ID and each entry.XXXXXXXXX with your real IDs
     // 4. Remove the // from the lines below to activate
     //
-   const body = new URLSearchParams({
-      'entry.1209174974': name,
-      'entry.863709102': email,
-      'entry.940587516': attending,
-      'entry.73533832': document.getElementById('fguests').value,
-      'entry.1533862517': document.getElementById('fmessage').value,
-    });
-    fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjuwEvltYfFicphtxaKYcvDDoKemOzdfLKrkbm5vKopLk8Bw/formResponse', {
+  fetch('https://script.google.com/macros/s/AKfycbwRYIY8cu2nMmMp_gHdGfSVYwHPHVvwp_1i7aUnPPiBnezq6AJBWrnW5CSKI5uG2jfSig/exec', {
   method: 'POST',
-  body: body,
   mode: 'no-cors',
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: new URLSearchParams({
+    name: name,
+    email: email,
+    attending: attending,
+    guests: document.getElementById('fguests').value,
+    message: document.getElementById('fmessage').value,
+  })
 });
     // ─────────────────────────────────────────────────────────────────────
     document.getElementById('rsvp-form').style.display='none';
