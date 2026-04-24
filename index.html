@@ -929,8 +929,12 @@
       'entry.73533832': document.getElementById('fguests').value,
       'entry.1533862517': document.getElementById('fmessage').value,
     });
-    fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjuwEvltYfFicphtxaKYcvDDoKemOzdfLKrkbm5vKopLk8Bw/formResponse',
-          { method: 'POST', body, mode: 'no-cors' });
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjuwEvltYfFicphtxaKYcvDDoKemOzdfLKrkbm5vKopLk8Bw/formResponse', {
+  method: 'POST',
+  body: body,
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+});
     // ─────────────────────────────────────────────────────────────────────
     document.getElementById('rsvp-form').style.display='none';
     document.getElementById('success-msg').style.display='block';
