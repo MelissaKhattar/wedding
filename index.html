@@ -439,15 +439,84 @@
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ===== RESPONSIVE — tablets & desktop scale-up ===== */
+
+    /* Make sections fill the viewport height better and use more horizontal space */
+    @media (min-width: 900px) {
+      section { padding: 5rem 4rem; }
+      .hero-title { font-size: clamp(5rem, 10vw, 9rem); }
+      .hero-subtitle { font-size: 2rem; }
+      .finally-badge { font-size: 1rem; padding: 0.5rem 1.6rem; }
+      .hermel-tag { font-size: 1.3rem; }
+      .flag-chip { font-size: 2.8rem; }
+
+      .detail-card { padding: 2.5rem 3.5rem; min-width: 280px; }
+      .card-value { font-size: 1.7rem; }
+      .card-sub { font-size: 1.05rem; }
+      .card-icon { font-size: 3rem; }
+      .card-label { font-size: 0.9rem; }
+      .countdown-title { font-size: 2rem; }
+      .count-num { font-size: 3.5rem; }
+      .count-label { font-size: 0.85rem; }
+      .count-block { min-width: 120px; padding: 1.25rem 2rem; }
+
+      .story-header h2 { font-size: 4rem; }
+      .timeline { max-width: 900px; }
+      .tl-card { padding: 1.75rem 2rem; }
+      .tl-title { font-size: 1.2rem; }
+      .tl-text { font-size: 1.05rem; }
+      .tl-icon { width: 3.5rem; height: 3.5rem; font-size: 1.4rem; }
+      .tl-icon-col { width: 70px; }
+
+      .rsvp-header h2 { font-size: 4rem; }
+      .rsvp-header p { font-size: 1.25rem; }
+      .rsvp-form-wrap { max-width: 600px; padding: 3rem; }
+      .form-group input,
+      .form-group select,
+      .form-group textarea { font-size: 1.1rem; padding: 0.9rem 1.2rem; }
+      .form-group label { font-size: 1rem; }
+      .rsvp-btn { font-size: 1.6rem; padding: 1.2rem; }
+
+      .footer-title { font-size: 2.8rem; }
+      .footer-sub { font-size: 1.05rem; }
+    }
+
+    /* ===== MOBILE ===== */
     @media (max-width: 600px) {
-      .timeline::before { left: 1.5rem; }
+      section { padding: 3rem 1.2rem; }
+
+      .finally-badge { font-size: 0.9rem; padding: 0.5rem 1.2rem; }
+      .hero-title { font-size: clamp(3.5rem, 15vw, 5rem); }
+      .hero-subtitle { font-size: 1.3rem; }
+      .hermel-tag { font-size: 1.05rem; }
+      .flag-chip { font-size: 2.2rem; }
+
+      .detail-cards { flex-direction: column; align-items: center; }
+      .detail-card { width: 90vw; min-width: unset; padding: 1.75rem 2rem; }
+      .card-value { font-size: 1.5rem; }
+      .card-icon { font-size: 2.8rem; }
+      .countdown-title { font-size: 1.4rem; }
+      .count-num { font-size: 2.8rem; }
+      .count-block { min-width: 70px; padding: 0.9rem 1rem; }
+
+      .story-header h2 { font-size: 2.5rem; }
       .timeline::before { left: 28px; }
       .timeline-item,
       .timeline-item.right,
       .timeline-item.left { flex-direction: column !important; text-align: left !important; }
       .tl-icon-col { width: 56px; padding-top: 0; }
       .tl-spacer { display: none; }
-      .tl-card { width: 100%; margin-left: 0 !important; margin-right: 0 !important; text-align: left !important; }
+      .tl-card { width: 100%; margin-left: 0 !important; margin-right: 0 !important; text-align: left !important; padding: 1.2rem 1.4rem; }
+      .tl-title { font-size: 1.1rem; }
+      .tl-text { font-size: 0.95rem; }
+
+      .rsvp-header h2 { font-size: 2.5rem; }
+      .rsvp-header p { font-size: 1rem; }
+      .rsvp-form-wrap { padding: 1.75rem 1.25rem; }
+      .form-group label { font-size: 0.9rem; }
+      .rsvp-btn { font-size: 1.2rem; }
+
+      .footer-title { font-size: 1.8rem; }
     }
   </style>
 </head>
