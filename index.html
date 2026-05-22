@@ -327,28 +327,39 @@ footer p{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ink)}
           <label><input type="radio" name="entry.1004697061" value="😢 Can't make it"><span>😢 Can't make it</span></label>
         </div>
       </div>
-      <div class="field">
-        <label>How many of you? (incl. yourself)</label>
-        <select name="entry.534865357" required>
-          <option value="">Pick a number…</option>
-          <option>1</option><option>2</option><option>3</option>
-          <option>4</option><option>5</option><option>6+</option>
-        </select>
+
+      <!-- everything below is hidden until "Are you coming?" is answered -->
+      <div id="restOfForm" style="display:none">
+
+        <!-- ── shown only when YES ── -->
+        <div class="yes-only">
+          <div class="field">
+            <label>How many of you? (incl. yourself)</label>
+            <select name="entry.534865357" id="guestsField">
+              <option value="">Pick a number…</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Dietary needs / allergies</label>
+            <input type="text" name="entry.1190734610" placeholder="veggie, gluten-free, no mushrooms…">
+          </div>
+          <div class="field">
+            <label>A song that gets you on the dance floor 🎵</label>
+            <input type="text" name="entry.310096067" placeholder="your request for the DJ">
+          </div>
+        </div>
+
+        <!-- ── "Anything else?" — relabelled depending on choice ── -->
+        <div class="field">
+          <label id="noteLabel">Anything else? (optional)</label>
+          <textarea name="entry.439252757" id="noteField" placeholder="messages, questions, jokes…"></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Send our RSVP ✦</button>
+        <p class="note">Your answers go straight to a private spreadsheet only HerMel can see.</p>
       </div>
-      <div class="field">
-        <label>Dietary needs / allergies</label>
-        <input type="text" name="entry.1190734610" placeholder="veggie, gluten-free, no mushrooms…">
-      </div>
-      <div class="field">
-        <label>A song that gets you on the dance floor 🎵</label>
-        <input type="text" name="entry.310096067" placeholder="your request for the DJ">
-      </div>
-      <div class="field">
-        <label>Anything else? (optional)</label>
-        <textarea name="entry.439252757" placeholder="messages, questions, jokes…"></textarea>
-      </div>
-      <button type="submit" class="btn">Send our RSVP ✦</button>
-      <p class="note">Your answers go straight to a private spreadsheet only HerMel can see.</p>
     </form>
   </div>
 </section>
@@ -361,11 +372,17 @@ footer p{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ink)}
   <p style="margin-top:.4rem">Questions? Email us at [YOUR EMAIL]</p>
 </footer>
 
-<!-- ═══════════ THANK YOU OVERLAY ═══════════ -->
-<div class="thanks" id="thanks">
+<!-- ═══════════ THANK YOU OVERLAYS ═══════════ -->
+<div class="thanks" id="thanksYes">
   <div class="big">You're the best!</div>
   <p>Your RSVP just landed safely in our spreadsheet (our favourite kind of document). We cannot wait to celebrate with you on a Greek beach. 🥂🌊</p>
-  <button onclick="document.getElementById('thanks').classList.remove('show')">Close</button>
+  <button onclick="document.getElementById('thanksYes').classList.remove('show')">Close</button>
+</div>
+
+<div class="thanks" id="thanksNo">
+  <div class="big" style="color:var(--hot)">We'll miss you 💔</div>
+  <p>Okay, this one stings a little — we were really hoping to have you there. But life happens, and we get it (HerMel know a thing or two about chaotic plans).<br><br>Thank you for letting us know. Somewhere on a Greek beach, between dance moves, we'll be thinking of you. We'll celebrate together another time. 🌊✈️</p>
+  <button onclick="document.getElementById('thanksNo').classList.remove('show')">Close</button>
 </div>
 
 <script>
@@ -390,6 +407,35 @@ tick();setInterval(tick,1000);
    👇 Replace FORM_ACTION_URL — see instructions at the bottom of the file. */
 const FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf_OionX-MTtXegbhl4_pGGaKa4uDLhqQbF5poCQncslonJqw/formResponse";
 
+/* ── Conditional fields: react to the "Are you coming?" choice ── */
+const restOfForm = document.getElementById('restOfForm');
+const yesOnly    = document.querySelector('.yes-only');
+const guestsField= document.getElementById('guestsField');
+const noteLabel  = document.getElementById('noteLabel');
+const noteField  = document.getElementById('noteField');
+const submitBtn  = document.getElementById('submitBtn');
+let attending = null;
+
+document.querySelectorAll('input[name="entry.1004697061"]').forEach(radio=>{
+  radio.addEventListener('change', function(){
+    attending = this.value;
+    restOfForm.style.display = 'block';
+    if(attending === '🎉 Yes!'){
+      yesOnly.style.display = 'block';
+      guestsField.setAttribute('required','');
+      noteLabel.textContent = 'Anything else? (optional)';
+      noteField.placeholder = 'messages, questions, jokes…';
+      submitBtn.textContent = 'Send our RSVP ✦';
+    } else {
+      yesOnly.style.display = 'none';
+      guestsField.removeAttribute('required');
+      noteLabel.textContent = 'Leave us a note (optional)';
+      noteField.placeholder = 'we\'d still love to hear from you…';
+      submitBtn.textContent = 'Send our reply 💌';
+    }
+  });
+});
+
 document.getElementById('rsvpForm').addEventListener('submit', function(e){
   e.preventDefault();
   const data = new FormData(this);
@@ -397,14 +443,25 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e){
     alert("⚙️  Setup needed: the form isn't connected yet.\nFollow the instructions at the bottom of index.html.");
     return;
   }
+  const wasComing = attending === '🎉 Yes!';
   fetch(FORM_ACTION_URL,{method:'POST',mode:'no-cors',body:data})
-    .then(()=>{showThanks();this.reset();})
-    .catch(()=>{showThanks();this.reset();});
+    .then(()=>{ finishRSVP(wasComing); })
+    .catch(()=>{ finishRSVP(wasComing); });
 });
 
-function showThanks(){
-  const t=document.getElementById('thanks');
+function finishRSVP(wasComing){
+  document.getElementById('rsvpForm').reset();
+  restOfForm.style.display = 'none';
+  yesOnly.style.display = 'none';
+  attending = null;
+  if(wasComing){ showThanks('thanksYes', true); }
+  else         { showThanks('thanksNo', false); }
+}
+
+function showThanks(id, celebrate){
+  const t=document.getElementById(id);
   t.classList.add('show');
+  if(!celebrate) return;            // no confetti for the sad screen
   const emojis=['🎉','💛','🥂','🌊','🧡','✨','💗','🐚'];
   for(let i=0;i<28;i++){
     const c=document.createElement('span');
