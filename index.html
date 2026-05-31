@@ -612,7 +612,7 @@ footer a{color:var(--hot);text-decoration:none}
 const WEDDING_DATE = new Date("2027-05-29T16:00:00");
 function tick(){
   const now=new Date(),gap=WEDDING_DATE-now;
-  if(gap<=0){document.getElementById('clock').innerHTML='<div class="unit"><div class="num">🎉</div><div class="lbl">It's today!</div></div>';return;}
+  if(gap<=0){document.getElementById('clock').innerHTML='<div class="unit"><div class="num">🎉</div><div class="lbl">It\'s today!</div></div>';return;}
   const d=Math.floor(gap/864e5),h=Math.floor(gap%864e5/36e5),m=Math.floor(gap%36e5/6e4),s=Math.floor(gap%6e4/1e3);
   document.getElementById('d').textContent=d;
   document.getElementById('h').textContent=h;
@@ -754,7 +754,7 @@ document.querySelectorAll('input[name="entry.1004697061"]').forEach(radio=>{
       noteField.placeholder="we'd still love to hear from you…";
       submitBtn.textContent='Send our reply 💌';
       formProgress.style.display='block';
-      formProgress.textContent='💌 We'll miss you — but thanks for letting us know!';
+      formProgress.textContent='💌 We\'ll miss you — but thanks for letting us know!';
     }
   });
 });
