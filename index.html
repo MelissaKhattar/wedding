@@ -136,24 +136,6 @@ h2{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1;letter-spacing
 .cal-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:99px;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;text-decoration:none;border:3px solid var(--paper);color:var(--paper);transition:.2s;cursor:pointer;background:transparent}
 .cal-btn:hover{background:var(--paper);color:var(--grape)}
 
-/* ─── TRAVEL MAP ─── */
-.map-section{background:var(--ink);color:var(--paper);text-align:center}
-.map-section .tag{background:var(--grape);color:var(--paper)}
-.world-map{position:relative;margin:2rem auto 0;max-width:700px}
-.world-map svg{width:100%;height:auto}
-.map-pins{position:absolute;top:0;left:0;width:100%;height:100%}
-.pin{position:absolute;transform:translate(-50%,-100%);cursor:pointer;animation:pinDrop .5s ease both}
-@keyframes pinDrop{from{transform:translate(-50%,-120%) scale(0)}to{transform:translate(-50%,-100%) scale(1)}}
-.pin .pin-dot{width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,.4);transition:.2s}
-.pin .pin-dot:hover{transform:scale(1.4)}
-.pin .pin-label{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:var(--paper);color:var(--ink);font-family:'Space Mono',monospace;font-size:.65rem;white-space:nowrap;padding:.2rem .5rem;border-radius:6px;opacity:0;transition:.2s;pointer-events:none;font-weight:700}
-.pin:hover .pin-label{opacity:1}
-.pin.next .pin-dot{background:var(--hot);animation:pulse 1.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,92,138,.6)}50%{box-shadow:0 0 0 10px rgba(255,92,138,0)}}
-.map-legend{display:flex;gap:1.5rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
-.map-legend span{font-family:'Space Mono',monospace;font-size:.72rem;display:flex;align-items:center;gap:.4rem}
-.dot-been{width:12px;height:12px;border-radius:50%;background:var(--lime);display:inline-block}
-.dot-next{width:12px;height:12px;border-radius:50%;background:var(--hot);display:inline-block}
 
 /* ─── SCHEDULE ─── */
 .schedule{position:relative;overflow:hidden}
@@ -363,21 +345,7 @@ footer a{color:var(--hot);text-decoration:none}
   </div>
 </section>
 
-<!-- ═══════════ TRAVEL MAP ═══════════ -->
-<section class="map-section" id="adventures">
-  <div class="wrap">
-    <span class="tag reveal">Adventures so far</span>
-    <h2 class="reveal reveal-delay-1">The world, according to HerMel</h2>
-    <p class="lead reveal reveal-delay-2" style="margin:0 auto 0;text-align:center">Every pin is a place we've explored together. And yes, we saved the best one for last. 🇬🇷</p>
-    <div class="w<div class="world-map reveal reveal-delay-2" id="worldMap">
-      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=23.0%2C37.2%2C23.3%2C37.4&layer=mapnik&marker=37.3042%2C23.1486" style="width:100%;height:420px;border:0;border-radius:16px;margin-top:1rem;display:block" allowfullscreen loading="lazy" title="Porto Heli, Greece - Wedding Location"></iframe>
-      <p style="text-align:center;margin-top:.5rem;font-family:'Space Mono',monospace;font-size:.75rem;opacity:.7">Porto Heli, Greece</p>
-    </div>   <div class="map-legend reveal">
-      <span><span class="dot-been"></span> Been there together</span>
-      <span><span class="dot-next"></span> Next stop: Greece 🇬🇷</span>
-    </div>
-  </div>
-</section>
+
 
 <!-- ═══════════ SCHEDULE ═══════════ -->
 <section class="schedule" id="schedule">
