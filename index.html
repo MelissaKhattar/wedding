@@ -80,7 +80,7 @@ body::before{
 .mobile-nav{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;
   background:var(--ink);padding:.6rem .5rem;
-  display:flex;justify-content:space-around;align-items:center;
+  justify-content:space-around;align-items:center;
   box-shadow:0 -4px 20px rgba(0,0,0,.3);
 }
 .mobile-nav a{
@@ -119,7 +119,7 @@ h2{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1;letter-spacing
 @media(max-width:640px){.story-grid{grid-template-columns:1fr}}
 .story-photo{border-radius:20px;overflow:hidden;box-shadow:10px 10px 0 var(--ink);transform:rotate(2deg);transition:transform .3s ease}
 .story-photo:hover{transform:rotate(0deg) scale(1.02)}
-.story-photo img{width:100%;display:block;object-fit:cover;height:auto;max-height:480px}@media(max-width:640px){.story-photo img{max-height:none;height:auto}}
+.story-photo img{width:100%;display:block;object-fit:cover;aspect-ratio:4/3}@media(max-width:640px){.story-photo img{aspect-ratio:auto;height:auto}}
 .story-caption{font-family:'Space Mono',monospace;font-size:.75rem;text-align:center;margin-top:.6rem;font-style:italic;opacity:.7}
 
 /* ─── DETAILS ─── */
@@ -213,7 +213,7 @@ h2{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1;letter-spacing
 .upload-btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--hot)}
 
 /* ─── RSVP ─── */
-.rsvp{background:var(--ink);color:var(--paper)}
+.rsvp{background:var(--ink);color:var(--paper);text-align:center}
 .rsvp .tag{background:var(--hot);color:var(--paper)}
 .rsvp .lead{margin-bottom:2rem}
 form{max-width:520px}
@@ -369,36 +369,10 @@ footer a{color:var(--hot);text-decoration:none}
     <span class="tag reveal">Adventures so far</span>
     <h2 class="reveal reveal-delay-1">The world, according to HerMel</h2>
     <p class="lead reveal reveal-delay-2" style="margin:0 auto 0;text-align:center">Every pin is a place we've explored together. And yes, we saved the best one for last. 🇬🇷</p>
-    <div class="world-map reveal reveal-delay-2" id="worldMap">
-      <!-- Simple SVG world outline -->
-      <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" style="display:block;background:rgba(255,255,255,.05);border-radius:16px;margin-top:1rem">
-        <defs>
-          <style>.land{fill:rgba(255,255,255,.12);stroke:rgba(255,255,255,.25);stroke-width:1}</style>
-        </defs>
-        <!-- Simplified continent paths -->
-        <!-- North America -->
-        <path class="land" d="M120,80 L200,70 L230,90 L250,110 L240,150 L220,170 L200,200 L180,220 L160,240 L140,250 L130,230 L120,210 L110,190 L100,160 L90,130 L100,100 Z"/>
-        <!-- South America -->
-        <path class="land" d="M200,230 L240,220 L260,240 L270,270 L265,300 L250,330 L230,360 L210,370 L195,350 L185,320 L185,290 L190,260 Z"/>
-        <!-- Europe -->
-        <path class="land" d="M440,70 L490,65 L510,80 L520,100 L510,120 L490,130 L470,125 L455,110 L445,90 Z"/>
-        <!-- Africa -->
-        <path class="land" d="M450,130 L500,120 L530,140 L540,170 L545,200 L540,240 L525,270 L505,290 L485,295 L465,280 L450,250 L440,220 L435,190 L440,160 Z"/>
-        <!-- Middle East / Lebanon -->
-        <path class="land" d="M530,110 L560,100 L580,115 L575,135 L555,140 L535,130 Z"/>
-        <!-- Asia -->
-        <path class="land" d="M540,60 L650,55 L720,70 L760,90 L780,110 L770,140 L740,155 L700,160 L660,155 L620,145 L580,130 L555,115 L540,95 Z"/>
-        <!-- Southeast Asia (Thailand, Indonesia) -->
-        <path class="land" d="M680,150 L720,145 L750,165 L755,185 L740,200 L715,205 L690,195 L675,175 Z"/>
-        <path class="land" d="M700,205 L740,200 L760,215 L755,230 L730,235 L705,225 Z"/>
-        <!-- Australia -->
-        <path class="land" d="M720,280 L800,265 L840,280 L850,310 L840,340 L810,355 L775,350 L745,335 L725,310 L715,290 Z"/>
-        <!-- UAE/Desert area -->
-        <path class="land" d="M565,120 L600,115 L615,130 L610,148 L590,155 L568,145 Z"/>
-      </svg>
-      <div class="map-pins" id="mapPins"></div>
-    </div>
-    <div class="map-legend reveal">
+    <div class="w<div class="world-map reveal reveal-delay-2" id="worldMap">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=23.0%2C37.2%2C23.3%2C37.4&layer=mapnik&marker=37.3042%2C23.1486" style="width:100%;height:420px;border:0;border-radius:16px;margin-top:1rem;display:block" allowfullscreen loading="lazy" title="Porto Heli, Greece - Wedding Location"></iframe>
+      <p style="text-align:center;margin-top:.5rem;font-family:'Space Mono',monospace;font-size:.75rem;opacity:.7">Porto Heli, Greece</p>
+    </div>   <div class="map-legend reveal">
       <span><span class="dot-been"></span> Been there together</span>
       <span><span class="dot-next"></span> Next stop: Greece 🇬🇷</span>
     </div>
@@ -509,22 +483,6 @@ footer a{color:var(--hot);text-decoration:none}
   </div>
 </section>
 
-<!-- ═══════════ PHOTO UPLOAD ═══════════ -->
-<section class="photos-section" id="photos">
-  <div class="wrap">
-    <span class="tag reveal">After the party</span>
-    <h2 class="reveal reveal-delay-1">Share your photos 📸</h2>
-    <p class="lead reveal reveal-delay-2" style="margin:0 auto;text-align:center">Once the confetti settles, we want to see the night through your eyes. Upload your photos to our shared album.</p>
-    <div class="photo-upload-card reveal reveal-delay-3">
-      <span class="ico">📷</span>
-      <h3>Drop your shots here</h3>
-      <p>A shared Google Drive folder will be live during and after the wedding. Every candid, every silly face, every sunset  -  we want it all.</p>
-      <a href="#" class="upload-btn">Upload photos ↗</a>
-      <p style="margin-top:.8rem;font-size:.8rem;opacity:.6;font-family:'Space Mono',monospace">(Link goes live closer to the wedding)</p>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ RSVP ═══════════ -->
 <section class="rsvp" id="rsvp">
   <div class="wrap">
@@ -587,6 +545,22 @@ footer a{color:var(--hot);text-decoration:none}
   </div>
 </section>
 
+<!-- ═══════════ PHOTO UPLOAD ═══════════ -->
+<section class="photos-section" id="photos">
+  <div class="wrap">
+    <span class="tag reveal">After the party</span>
+    <h2 class="reveal reveal-delay-1">Share your photos 📸</h2>
+    <p class="lead reveal reveal-delay-2" style="margin:0 auto;text-align:center">Once the confetti settles, we want to see the night through your eyes. Upload your photos to our shared album.</p>
+    <div class="photo-upload-card reveal reveal-delay-3">
+      <span class="ico">📷</span>
+      <h3>Drop your shots here</h3>
+      <p>A shared Google Drive folder will be live during and after the wedding. Every candid, every silly face, every sunset  -  we want it all.</p>
+      <a href="#" class="upload-btn">Upload photos ↗</a>
+      <p style="margin-top:.8rem;font-size:.8rem;opacity:.6;font-family:'Space Mono',monospace">(Link goes live closer to the wedding)</p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="hearts">💛 🧡 💗</div>
@@ -608,6 +582,9 @@ footer a{color:var(--hot);text-decoration:none}
 </div>
 
 <script>
+// -- FAQ ACCORDION --
+document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.faq-item').classList.toggle('open');});});
+
 /* ════════ COUNTDOWN ════════ */
 const WEDDING_DATE = new Date("2027-05-29T16:00:00");
 function tick(){
