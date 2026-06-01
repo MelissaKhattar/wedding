@@ -608,24 +608,6 @@ END:VCALENDAR`;
 const icsBlob = new Blob([icsContent], {type:'text/calendar'});
 document.getElementById('icalBtn').href = URL.createObjectURL(icsBlob);
 
-/* ════════ TRAVEL MAP PINS ════════ */
-const destinations = [
-  {name:'🇳🇱 Netherlands',x:46.5,y:21,color:'var(--lime)',been:true},
-  {name:'🇱🇧 Lebanon',x:54.8,y:27.5,color:'var(--lime)',been:true},
-  {name:'🇹🇭 Thailand',x:70,y:36,color:'var(--lime)',been:true},
-  {name:'🇮🇩 Bali',x:72,y:42,color:'var(--lime)',been:true},
-  {name:'🇦🇪 Dubai',x:58.5,y:30,color:'var(--lime)',been:true},
-  {name:'🇬🇷 Greece  -  next! 💍',x:50,y:26,color:'var(--hot)',been:false},
-];
-const pinsContainer = document.getElementById('mapPins');
-destinations.forEach((dest,i)=>{
-  const pin = document.createElement('div');
-  pin.className = 'pin' + (dest.been ? '' : ' next');
-  pin.style.cssText = `left:${dest.x}%;top:${dest.y}%;animation-delay:${i*0.15}s`;
-  pin.innerHTML = `<div class="pin-dot" style="background:${dest.color}"></div><div class="pin-label">${dest.name}</div>`;
-  pinsContainer.appendChild(pin);
-});
-
 /* ════════ PLAYLIST / SONG COUNTER ════════ */
 const SONGS_KEY = 'hermel_songs';
 function getSongs(){ try{return JSON.parse(localStorage.getItem(SONGS_KEY)||'[]')}catch{return[]} }
