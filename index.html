@@ -203,7 +203,8 @@ h2{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1;letter-spacing
 /* ─── RSVP ─── */
 .rsvp{background:var(--ink);color:var(--paper);text-align:center}
 .rsvp .tag{background:var(--hot);color:var(--paper)}
-.rsvp .lead{margin-bottom:2rem}
+.rsvp .lead{margin:0 auto 2rem}
+.rsvp form{margin:0 auto;text-align:left}
 form{max-width:520px}
 .field{margin-bottom:1.3rem;text-align:left}
 .field label{display:block;font-family:'Space Mono',monospace;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.45rem;color:var(--lime)}
@@ -237,34 +238,26 @@ footer .hearts{font-size:1.6rem;margin-bottom:.6rem}
 footer p{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ink)}
 footer a{color:var(--hot);text-decoration:none}
 
-/* ─── SONG SEARCH ─── */
-.song-search-wrap{position:relative;max-width:520px;margin:1.6rem auto 0}
-.song-search-wrap input{
-  width:100%;padding:.95rem 1.2rem;border:none;border-radius:99px;
+/* ─── SONG FORM ─── */
+.song-form{display:flex;gap:.6rem;margin:1.6rem auto 0;max-width:520px;flex-wrap:wrap}
+.song-form input{
+  flex:1;min-width:200px;padding:.85rem 1.1rem;border:none;border-radius:99px;
   font-family:'Fraunces',serif;font-size:1rem;
   background:rgba(255,255,255,.15);color:var(--paper);
   border:2px solid rgba(255,255,255,.3);outline:none;
 }
-.song-search-wrap input::placeholder{color:rgba(255,255,255,.55)}
-.song-search-wrap input:focus{border-color:var(--lime);background:rgba(255,255,255,.22)}
-.song-suggestions{
-  position:absolute;top:calc(100% + .4rem);left:0;right:0;z-index:10;
-  background:var(--paper);color:var(--ink);border-radius:14px;overflow:hidden;
-  box-shadow:6px 6px 0 var(--hot);max-height:340px;overflow-y:auto;display:none;
+.song-form input::placeholder{color:rgba(255,255,255,.55)}
+.song-form input:focus{border-color:var(--lime);background:rgba(255,255,255,.22)}
+.song-form input:disabled{opacity:.5;cursor:not-allowed}
+.song-form button{
+  padding:.85rem 1.6rem;border:none;border-radius:99px;
+  background:var(--hot);color:var(--paper);
+  font-family:'Fraunces',serif;font-weight:900;font-size:1rem;cursor:pointer;
+  box-shadow:4px 4px 0 var(--lime);transition:.15s;
 }
-.song-suggestions.show{display:block}
-.song-suggestion{
-  display:flex;align-items:center;gap:.7rem;padding:.6rem .9rem;cursor:pointer;
-  border-bottom:1px solid rgba(0,0,0,.06);transition:background .15s;text-align:left;
-}
-.song-suggestion:last-child{border-bottom:none}
-.song-suggestion:hover{background:var(--lime)}
-.song-suggestion img{width:42px;height:42px;border-radius:6px;flex-shrink:0;object-fit:cover}
-.song-suggestion .meta{flex:1;min-width:0}
-.song-suggestion .title{font-weight:900;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.song-suggestion .artist{font-family:'Space Mono',monospace;font-size:.72rem;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.song-suggestions .empty{padding:.9rem;text-align:center;font-family:'Space Mono',monospace;font-size:.78rem;opacity:.6}
-.song-quota{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--lime);margin-top:.7rem;letter-spacing:.1em}
+.song-form button:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--lime)}
+.song-form button:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:4px 4px 0 var(--lime)}
+.song-quota{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--lime);margin-top:.9rem;letter-spacing:.1em}
 .song-toast{
   position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);
   background:var(--ink);color:var(--paper);padding:.7rem 1.2rem;border-radius:99px;
@@ -522,17 +515,13 @@ footer a{color:var(--hot);text-decoration:none}
     <span class="tag reveal">The dance floor</span>
     <h2 class="reveal reveal-delay-1">Build our playlist 🎵</h2>
     <p class="lead reveal reveal-delay-2" style="margin:0 auto;text-align:center">
-      Add up to <strong>3 songs</strong> that get you moving  -  they'll land straight in our wedding Spotify playlist.
+      Tell us up to <strong>3 songs</strong> that get you on the dance floor  -  we'll build the playlist around your picks.
     </p>
 
-    <div class="song-counter reveal reveal-delay-2" id="songCount">-</div>
-    <p class="song-counter-label reveal">songs in the playlist so far</p>
-    <div class="recent-songs reveal" id="recentSongs"></div>
-
-    <div class="song-search-wrap reveal reveal-delay-3">
-      <input type="text" id="songInput" placeholder="Start typing  -  artist or song title…" autocomplete="off" aria-label="Search for a song">
-      <div class="song-suggestions" id="songSuggestions" role="listbox"></div>
-    </div>
+    <form class="song-form reveal reveal-delay-3" id="songForm" autocomplete="off">
+      <input type="text" id="songInput" maxlength="120" placeholder="e.g. ABBA  -  Dancing Queen 🎶" aria-label="Song suggestion" required>
+      <button type="submit" id="songBtn">Add it ✦</button>
+    </form>
     <p class="song-quota mono" id="songQuota">YOU CAN ADD 3 SONGS</p>
     <div class="your-picks" id="yourPicks"></div>
   </div>
@@ -635,11 +624,14 @@ footer a{color:var(--hot);text-decoration:none}
 
 <script>
 /* ════════ CONFIG ════════ */
-// Cloudflare Worker that talks to Spotify. See worker/spotify-playlist.js for setup.
-// Leave as empty string to disable playlist features gracefully.
-const PLAYLIST_WORKER_URL = "";
+// Google Form for song suggestions (separate from the RSVP form).
+// Leave PLAYLIST_FORM_URL as "" to keep the input visible but disable submissions.
+//   PLAYLIST_FORM_URL      — the form's /formResponse URL
+//   PLAYLIST_FORM_ENTRY_ID — the entry.XXXXX name of the song-text field
+const PLAYLIST_FORM_URL = "";
+const PLAYLIST_FORM_ENTRY_ID = "entry.0000000000";
 // Google Photos shared album URL. Leave empty to keep the "coming soon" state.
-const PHOTOS_ALBUM_URL = "";
+const PHOTOS_ALBUM_URL = "https://photos.app.goo.gl/kF6Vbd1gKv9hkJdg6";
 
 // -- FAQ ACCORDION --
 document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.faq-item').classList.toggle('open');});});
@@ -738,14 +730,13 @@ END:VCALENDAR`;
 const icsBlob = new Blob([icsContent], {type:'text/calendar'});
 document.getElementById('icalBtn').href = URL.createObjectURL(icsBlob);
 
-/* ════════ PLAYLIST (SPOTIFY VIA WORKER) ════════ */
+/* ════════ PLAYLIST (GOOGLE FORM) ════════ */
 (function(){
-  const PICKS_KEY='hermel_picks_v1';
+  const PICKS_KEY='hermel_picks_v2';
   const MAX_PICKS=3;
+  const form=document.getElementById('songForm');
   const input=document.getElementById('songInput');
-  const suggestionsEl=document.getElementById('songSuggestions');
-  const countEl=document.getElementById('songCount');
-  const recentEl=document.getElementById('recentSongs');
+  const btn=document.getElementById('songBtn');
   const quotaEl=document.getElementById('songQuota');
   const picksEl=document.getElementById('yourPicks');
   const toastEl=document.getElementById('songToast');
@@ -753,20 +744,18 @@ document.getElementById('icalBtn').href = URL.createObjectURL(icsBlob);
   function picks(){try{return JSON.parse(localStorage.getItem(PICKS_KEY)||'[]')}catch{return[]}}
   function setPicks(p){try{localStorage.setItem(PICKS_KEY,JSON.stringify(p))}catch{}}
 
-  function renderQuota(){
+  function render(){
     const left=MAX_PICKS-picks().length;
     quotaEl.textContent = left>0
       ? `YOU CAN ADD ${left} ${left===1?'MORE SONG':'MORE SONGS'}`
-      : "THAT'S YOUR 3  -  SEE YOU ON THE DANCE FLOOR";
+      : "THAT'S YOUR 3  -  SEE YOU ON THE DANCE FLOOR ✨";
     input.disabled = left<=0;
-    input.placeholder = left>0 ? 'Start typing  -  artist or song title…' : 'You\'ve added 3 songs ✨';
-  }
-  function renderPicks(){
+    btn.disabled = left<=0;
     picksEl.innerHTML='';
-    picks().forEach(p=>{
+    picks().forEach(s=>{
       const chip=document.createElement('span');
       chip.className='pick-chip';
-      chip.textContent=`✦ ${p.name}  -  ${p.artist}`;
+      chip.textContent=`✦ ${s}`;
       picksEl.appendChild(chip);
     });
   }
@@ -778,124 +767,30 @@ document.getElementById('icalBtn').href = URL.createObjectURL(icsBlob);
     toastTimer=setTimeout(()=>toastEl.classList.remove('show'),2400);
   }
 
-  function disabled(){
-    if(!PLAYLIST_WORKER_URL){
-      input.disabled=true;
-      input.placeholder='Playlist opens closer to the wedding 🎵';
-      quotaEl.style.display='none';
-      countEl.textContent='—';
-      return true;
-    }
-    return false;
-  }
-
-  async function refreshPlaylistState(){
-    if(disabled()) return;
-    try{
-      const r=await fetch(`${PLAYLIST_WORKER_URL}/recent`);
-      if(!r.ok) throw 0;
-      const data=await r.json();
-      countEl.textContent=data.total ?? 0;
-      recentEl.innerHTML='';
-      (data.tracks||[]).slice(0,6).forEach(t=>{
-        const pill=document.createElement('div');
-        pill.className='song-pill';
-        pill.textContent=`${t.name}  -  ${t.artist}`;
-        recentEl.appendChild(pill);
-      });
-    }catch{
-      countEl.textContent='—';
-    }
-  }
-
-  let searchTimer=null;
-  let lastQuery='';
-  function debouncedSearch(){
-    clearTimeout(searchTimer);
-    const q=input.value.trim();
-    if(q.length<2){clearSuggestions();return;}
-    if(q===lastQuery) return;
-    searchTimer=setTimeout(()=>runSearch(q),250);
-  }
-  function clearSuggestions(){
-    suggestionsEl.classList.remove('show');
-    suggestionsEl.innerHTML='';
-  }
-  async function runSearch(q){
-    lastQuery=q;
-    try{
-      const r=await fetch(`${PLAYLIST_WORKER_URL}/search?q=${encodeURIComponent(q)}`);
-      if(!r.ok) throw 0;
-      const data=await r.json();
-      renderSuggestions(data.tracks||[]);
-    }catch{
-      suggestionsEl.innerHTML='<div class="empty">Couldn\'t reach Spotify  -  try again</div>';
-      suggestionsEl.classList.add('show');
-    }
-  }
-  function renderSuggestions(tracks){
-    suggestionsEl.innerHTML='';
-    if(!tracks.length){
-      suggestionsEl.innerHTML='<div class="empty">No matches  -  try a different spelling</div>';
-      suggestionsEl.classList.add('show');return;
-    }
-    tracks.forEach(t=>{
-      const row=document.createElement('button');
-      row.type='button';
-      row.className='song-suggestion';
-      row.setAttribute('role','option');
-      row.dataset.id=t.id;
-      row.dataset.name=t.name;
-      row.dataset.artist=t.artist;
-      row.innerHTML=`
-        ${t.art?`<img src="${t.art}" alt="" loading="lazy">`:'<div style="width:42px;height:42px;border-radius:6px;background:#eee;flex-shrink:0"></div>'}
-        <div class="meta">
-          <div class="title"></div>
-          <div class="artist"></div>
-        </div>`;
-      row.querySelector('.title').textContent=t.name;
-      row.querySelector('.artist').textContent=t.artist;
-      row.addEventListener('click',()=>addPick(t));
-      suggestionsEl.appendChild(row);
-    });
-    suggestionsEl.classList.add('show');
-  }
-
-  async function addPick(track){
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const val=input.value.trim();
+    if(!val) return;
     const current=picks();
     if(current.length>=MAX_PICKS){toast('You\'ve already added 3 songs ✨');return;}
-    if(current.some(p=>p.id===track.id)){toast('You already picked that one 🎵');return;}
-    input.value='';clearSuggestions();
-    // optimistic
-    current.push({id:track.id,name:track.name,artist:track.artist});
-    setPicks(current);renderPicks();renderQuota();
-    try{
-      const r=await fetch(`${PLAYLIST_WORKER_URL}/add`,{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({id:track.id})
-      });
-      if(!r.ok) throw 0;
-      toast(`✨ Added: ${track.name}`);
-      refreshPlaylistState();
-      const counter=countEl;
-      counter.style.transform='scale(1.25)';
-      setTimeout(()=>counter.style.transform='',400);
-    }catch{
-      // rollback
-      const back=picks().filter(p=>p.id!==track.id);
-      setPicks(back);renderPicks();renderQuota();
-      toast('Couldn\'t add that song  -  try again');
-    }
-  }
+    if(current.map(s=>s.toLowerCase()).includes(val.toLowerCase())){toast('You already added that one 🎵');return;}
 
-  if(!disabled()){
-    input.addEventListener('input',debouncedSearch);
-    input.addEventListener('focus',debouncedSearch);
-    document.addEventListener('click',e=>{
-      if(!e.target.closest('.song-search-wrap')) clearSuggestions();
-    });
-  }
-  renderQuota();renderPicks();refreshPlaylistState();
+    current.push(val);
+    setPicks(current);
+    input.value='';
+    render();
+
+    if(PLAYLIST_FORM_URL){
+      const fd=new FormData();
+      fd.append(PLAYLIST_FORM_ENTRY_ID, val);
+      fetch(PLAYLIST_FORM_URL,{method:'POST',mode:'no-cors',body:fd}).catch(()=>{});
+      toast('✨ Added to the playlist');
+    } else {
+      toast('Saved! (Playlist form not wired up yet)');
+    }
+  });
+
+  render();
 })();
 
 /* ════════ RSVP FORM ════════ */
