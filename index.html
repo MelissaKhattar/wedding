@@ -457,7 +457,7 @@ footer a{color:var(--hot);text-decoration:none}
   <div class="wrap">
     <span class="tag reveal">Choose your adventure</span>
     <h2 class="reveal reveal-delay-1">What should we do together?</h2>
-    <p class="lead reveal reveal-delay-2">Pick anything that sounds fun - we'll use your votes to help plan the group activities during the week. Add your name, choose your favourites, and pop them straight into your RSVP.</p>
+    <p class="lead reveal reveal-delay-2">Tick anything that sounds fun — we'll bundle your picks into your RSVP automatically when you hit send.</p>
     <div class="activities-list reveal reveal-delay-3">
       <label class="activity-item"><input type="checkbox" value="Hydra Island boat trip"><span>🛥️ Hydra Island boat trip</span></label>
       <label class="activity-item"><input type="checkbox" value="Snorkeling"><span>🤿 Snorkeling</span></label>
@@ -468,12 +468,6 @@ footer a{color:var(--hot);text-decoration:none}
       <label class="activity-item"><input type="checkbox" value="Karaoke night"><span>🎤 Karaoke night</span></label>
       <label class="activity-item"><input type="checkbox" value="Game &amp; cards night"><span>🎲 Game &amp; cards night</span></label>
     </div>
-    <div class="field">
-      <label>Your name</label>
-      <input type="text" id="activityName" placeholder="so we know whose votes these are">
-    </div>
-    <button type="button" class="btn" id="activitySubmitBtn">Add my picks to my RSVP ✦</button>
-    <p class="note" id="activityNote">This adds your picks straight into the "Anything else" box of the RSVP form below - just scroll down and hit send!</p>
   </div>
 </section>
 
@@ -679,32 +673,8 @@ const PHOTOS_ALBUM_URL = "https://photos.app.goo.gl/kF6Vbd1gKv9hkJdg6";
 // -- FAQ ACCORDION --
 document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.faq-item').classList.toggle('open');});});
 
-/* ════════ ACTIVITIES VOTE -> RSVP ════════ */
-(function(){
-  var subBtn = document.getElementById('activitySubmitBtn');
-  if(!subBtn) return;
-  subBtn.addEventListener('click', function(){
-    var picks = Array.from(document.querySelectorAll('.activity-item input:checked')).map(function(c){return c.value;});
-    var noteEl = document.getElementById('activityNote');
-    if(picks.length === 0){
-      noteEl.textContent = 'Pick at least one activity first!';
-      return;
-    }
-    var nameVal = document.getElementById('activityName').value.trim();
-    var summary = (nameVal ? nameVal + ' would love to join: ' : 'Interested in: ') + picks.join(', ');
-    var noteField = document.getElementById('noteField');
-    var nameField = document.getElementById('nameField');
-    if(noteField){
-      noteField.value = noteField.value ? noteField.value + '\n' + summary : summary;
-    }
-    if(nameField && !nameField.value && nameVal){
-      nameField.value = nameVal;
-    }
-    noteEl.textContent = 'Added! Scroll down and hit send on your RSVP to lock it in. 🎉';
-    var rsvpSection = document.getElementById('rsvp');
-    if(rsvpSection) rsvpSection.scrollIntoView({behavior:'smooth'});
-  });
-})();
+/* ════════ ACTIVITIES BUNDLING ════════ */
+// Activities are now bundled automatically on RSVP submit.
 
 /* ════════ COUNTDOWN ════════ */
 const WEDDING_DATE = new Date("2027-06-10T16:00:00");
@@ -934,6 +904,14 @@ document.getElementById('rsvpForm').addEventListener('submit',function(e){
   if(attending==='🎉 Yes!' && !guestsField.value){showError('guestsField','guestsError');valid=false;}
   
   if(!valid) return;
+
+  // Bundle activities into the note field automatically
+  const activityPicks = Array.from(document.querySelectorAll('.activity-item input:checked')).map(c => c.value);
+  if (activityPicks.length > 0) {
+    const activityString = "Activities: " + activityPicks.join(", ");
+    const currentNote = noteField.value.trim();
+    noteField.value = currentNote ? currentNote + "\n\n" + activityString : activityString;
+  }
   
   const data = new FormData(this);
   const wasComing = attending==='🎉 Yes!';
