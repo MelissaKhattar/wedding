@@ -34,6 +34,7 @@ body::before{
 .reveal-delay-2{transition-delay:.2s}
 .reveal-delay-3{transition-delay:.3s}
 .reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
 
 /* ─── HERO ─── */
 .hero{
@@ -166,6 +167,19 @@ h2{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;line-height:1;letter-spacing
 .swatches{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
 .sw{width:54px;height:54px;border-radius:50%;border:4px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
 
+/* ─── ACTIVITIES ─── */
+.activities{background:var(--lime);text-align:center}
+.activities .tag{background:var(--ink);color:var(--lime)}
+.activities .field{max-width:520px;margin:1.6rem auto 0;text-align:left}
+.activities .field label{color:var(--ink)}
+.activities-list{display:flex;flex-direction:column;gap:.7rem;max-width:520px;margin:1.8rem auto 0;text-align:left}
+.activity-item{display:flex;align-items:center;gap:.7rem;background:var(--paper);padding:.85rem 1.2rem;border-radius:14px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;font-size:1.05rem;font-weight:600}
+.activity-item input{width:auto;accent-color:var(--hot);transform:scale(1.2)}
+.activities .btn{box-shadow:6px 6px 0 var(--ink)}
+.activities .btn:hover{box-shadow:8px 8px 0 var(--ink)}
+.activities .btn:active{box-shadow:2px 2px 0 var(--ink)}
+.activities .note{color:var(--ink)}
+
 /* ─── FAQ ─── */
 .faq{background:var(--tang)}
 .faq .tag{background:var(--ink);color:var(--tang)}
@@ -290,6 +304,7 @@ footer a{color:var(--hot);text-decoration:none}
     <a href="#story" data-section="story"><span class="nav-icon" aria-hidden="true">💛</span>Story</a>
     <a href="#details" data-section="details"><span class="nav-icon" aria-hidden="true">📍</span>Details</a>
     <a href="#schedule" data-section="schedule"><span class="nav-icon" aria-hidden="true">📅</span>Weekend</a>
+    <a href="#activities" data-section="activities"><span class="nav-icon" aria-hidden="true">🏝️</span>Activities</a>
     <a href="#dress" data-section="dress"><span class="nav-icon" aria-hidden="true">👗</span>Dress</a>
     <a href="#faq" data-section="faq"><span class="nav-icon" aria-hidden="true">❓</span>FAQ</a>
     <a href="#playlist" data-section="playlist"><span class="nav-icon" aria-hidden="true">🎵</span>Songs</a>
@@ -347,7 +362,7 @@ footer a{color:var(--hot);text-decoration:none}
           Three years of travelling the world together, one shared Excel finance
           sheet we genuinely consider <em>entertainment</em>, and a long list of
           "big plans" later  -  Herman and Melissa are making it official.<br><br>
-          Our parents have called us the lovebirds for years. In May 2027, on a
+          Our parents have called us the lovebirds for years. In June 2027, on a
           Greek beach, we're finally giving them a reason to put it on a cake.<br><br>
           <span class="joke">We currently live in the Netherlands. Emphasis on
           "currently"  -  the suitcases are never fully unpacked, and the next
@@ -406,7 +421,7 @@ footer a{color:var(--hot);text-decoration:none}
   <div class="schedule-bg"></div>
   <div class="wrap">
     <span class="tag reveal">The weekend</span>
-    <h2 class="reveal reveal-delay-1">Four days of HerMel</h2>
+    <h2 class="reveal reveal-delay-1">Five days of HerMel</h2>
     <div class="timeline">
       <div class="event reveal reveal-delay-1">
         <p class="when">DAY 1 · ARRIVALS</p>
@@ -414,9 +429,9 @@ footer a{color:var(--hot);text-decoration:none}
         <p>Everyone trickles in, drops their bags, and we kick things off with a mini bachelor/bachelorette-ish party. Low effort, high fun.</p>
       </div>
       <div class="event reveal reveal-delay-2">
-        <p class="when">DAY 2 · THE CALM</p>
-        <h3>Chill &amp; Prep 🌅</h3>
-        <p>A proper lazy day. Beach, snacks, and gentle wedding prep. Conserve energy  -  you'll need it.</p>
+        <p class="when">DAY 2 · THE CALM (+ A LITTLE ADVENTURE)</p>
+        <h3>Chill, Prep &amp; Hydra Bachelorette 🛥️🍹</h3>
+        <p>A lazy morning for most  -  beach, snacks, and gentle wedding prep. In the afternoon, the girls hop on a boat over to Hydra island for a proper bachelorette send-off: cobblestone lanes, seaside cocktails, and toasting to Melissa before the big day.</p>
       </div>
       <div class="event reveal reveal-delay-3">
         <p class="when">DAY 3 · THE BIG ONE</p>
@@ -426,9 +441,39 @@ footer a{color:var(--hot);text-decoration:none}
       <div class="event reveal reveal-delay-4">
         <p class="when">DAY 4 · THE WIND-DOWN</p>
         <h3>Recovery Mode 🥐</h3>
-        <p>One more easy day all together. Sunglasses on, stories swapped, slow goodbyes.</p>
+        <p>One more easy day all together. Sunglasses on, late breakfasts, and stories from the night before.</p>
+      </div>
+      <div class="event reveal reveal-delay-5">
+        <p class="when">DAY 5 · THE GOODBYE</p>
+        <h3>One Last Sunrise &amp; Safe Travels 🧡</h3>
+        <p>Coffee on the terrace, one final swim, and suitcases that somehow weigh more than when you arrived (souvenirs, we don't judge). We'll wave you off from the villa with hugs, playlists to remember us by, and an open invitation to come back anytime. Thank you for being part of our best days.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ ACTIVITIES ═══════════ -->
+<section class="activities" id="activities">
+  <div class="wrap">
+    <span class="tag reveal">Choose your adventure</span>
+    <h2 class="reveal reveal-delay-1">What should we do together?</h2>
+    <p class="lead reveal reveal-delay-2">Pick anything that sounds fun - we'll use your votes to help plan the group activities during the week. Add your name, choose your favourites, and pop them straight into your RSVP.</p>
+    <div class="activities-list reveal reveal-delay-3">
+      <label class="activity-item"><input type="checkbox" value="Hydra Island boat trip"><span>🛥️ Hydra Island boat trip</span></label>
+      <label class="activity-item"><input type="checkbox" value="Snorkeling"><span>🤿 Snorkeling</span></label>
+      <label class="activity-item"><input type="checkbox" value="Sunrise hike"><span>🥾 Sunrise hike</span></label>
+      <label class="activity-item"><input type="checkbox" value="Beach volleyball tournament"><span>🏐 Beach volleyball tournament</span></label>
+      <label class="activity-item"><input type="checkbox" value="Greek cooking class"><span>🍳 Greek cooking class</span></label>
+      <label class="activity-item"><input type="checkbox" value="Local wine tasting"><span>🍷 Local wine tasting</span></label>
+      <label class="activity-item"><input type="checkbox" value="Karaoke night"><span>🎤 Karaoke night</span></label>
+      <label class="activity-item"><input type="checkbox" value="Game &amp; cards night"><span>🎲 Game &amp; cards night</span></label>
+    </div>
+    <div class="field">
+      <label>Your name</label>
+      <input type="text" id="activityName" placeholder="so we know whose votes these are">
+    </div>
+    <button type="button" class="btn" id="activitySubmitBtn">Add my picks to my RSVP ✦</button>
+    <p class="note" id="activityNote">This adds your picks straight into the "Anything else" box of the RSVP form below - just scroll down and hit send!</p>
   </div>
 </section>
 
@@ -466,9 +511,9 @@ footer a{color:var(--hot);text-decoration:none}
       <p>
         Honestly, having you on a Greek beach with us is the whole point  -  please don't feel any pressure to bring a thing.
         <br><br>
-        That said: we live out of suitcases, so anything that <em>fits</em> in one is tricky to take home. If you'd genuinely like to mark the day, a small contribution toward the next HerMel adventure would mean the world.
+        That said: we live out of suitcases, so physical presents are tricky for us to take home. If you'd genuinely like to mark the day, a monetary contribution toward the next HerMel adventure would mean the world to us.
       </p>
-      <span class="mono" id="giftDetails">Account details to follow  -  we'll share them closer to the date.</span>
+      <span class="mono" id="giftDetails">We happily welcome monetary gifts as our way of celebrating together  -  no physical presents necessary.</span>
     </div>
   </div>
 </section>
@@ -481,11 +526,11 @@ footer a{color:var(--hot);text-decoration:none}
     <div class="faq-list reveal reveal-delay-2">
       <div class="faq-item">
         <button class="faq-q">Do I need to rent a car? <span class="arrow">▼</span></button>
-        <div class="faq-a">You can rent a car if you feel like it, but we will have transport set up in Athens to take you to the villa and back to the airport - no car needed!</div>
+        <div class="faq-a">Renting a car is a great idea for getting around easily during the week. That said, we're happy to arrange transportation from the airport if you'd rather skip the rental. If you do want to rent a car, just let us know - we can help carpool with other guests so everyone's taken care of and no one's left without a ride.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Can I come for fewer than four days? <span class="arrow">▼</span></button>
-        <div class="faq-a">You can come for fewer than 4 days, but we will be prioritising guests staying the whole period for the villas - if space runs tight, we may ask you to book your own hotel. Just let us know your dates in the RSVP!</div>
+        <button class="faq-q">Can I come for fewer than five days? <span class="arrow">▼</span></button>
+        <div class="faq-a">You can come for fewer than 5 days, but we will be prioritising guests staying the whole period for the villas - if space runs tight, we may ask you to book your own hotel. Just let us know your dates in the RSVP!</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Are kids welcome? <span class="arrow">▼</span></button>
@@ -604,7 +649,7 @@ footer a{color:var(--hot);text-decoration:none}
 <footer>
   <div class="hearts" aria-hidden="true">💛 🧡 💗</div>
   <p>Made with love (and a little chaos) by HerMel</p>
-  <p style="margin-top:.4rem">Herman &amp; Melissa · Villa Ermyoni, Greece · May 2027</p>
+  <p style="margin-top:.4rem">Herman &amp; Melissa · Villa Ermyoni, Greece · June 2027</p>
   <p style="margin-top:.4rem">Questions? <a href="mailto:meli.khattar@gmail.com?cc=herman.van.uum@gmail.com&subject=HerMel%20Wedding">Email us</a></p>
 </footer>
 
@@ -634,9 +679,36 @@ const PHOTOS_ALBUM_URL = "https://photos.app.goo.gl/kF6Vbd1gKv9hkJdg6";
 // -- FAQ ACCORDION --
 document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.faq-item').classList.toggle('open');});});
 
+/* ════════ ACTIVITIES VOTE -> RSVP ════════ */
+(function(){
+  var subBtn = document.getElementById('activitySubmitBtn');
+  if(!subBtn) return;
+  subBtn.addEventListener('click', function(){
+    var picks = Array.from(document.querySelectorAll('.activity-item input:checked')).map(function(c){return c.value;});
+    var noteEl = document.getElementById('activityNote');
+    if(picks.length === 0){
+      noteEl.textContent = 'Pick at least one activity first!';
+      return;
+    }
+    var nameVal = document.getElementById('activityName').value.trim();
+    var summary = (nameVal ? nameVal + ' would love to join: ' : 'Interested in: ') + picks.join(', ');
+    var noteField = document.getElementById('noteField');
+    var nameField = document.getElementById('nameField');
+    if(noteField){
+      noteField.value = noteField.value ? noteField.value + '\n' + summary : summary;
+    }
+    if(nameField && !nameField.value && nameVal){
+      nameField.value = nameVal;
+    }
+    noteEl.textContent = 'Added! Scroll down and hit send on your RSVP to lock it in. 🎉';
+    var rsvpSection = document.getElementById('rsvp');
+    if(rsvpSection) rsvpSection.scrollIntoView({behavior:'smooth'});
+  });
+})();
+
 /* ════════ COUNTDOWN ════════ */
-const WEDDING_DATE = new Date("2027-05-29T16:00:00");
-const WEDDING_END = new Date("2027-06-02T12:00:00");
+const WEDDING_DATE = new Date("2027-06-10T16:00:00");
+const WEDDING_END = new Date("2027-06-14T12:00:00");
 let countdownTimer = null;
 function tick(){
   const now=new Date(),gap=WEDDING_DATE-now;
@@ -710,16 +782,16 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* ════════ CALENDAR BUTTONS ════════ */
-const weddingDateStr = '20270529';
-const weddingEnd = '20270602';
+const weddingDateStr = '20270610';
+const weddingEnd = '20270615';
 const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=HerMel+Wedding+%F0%9F%92%8D&dates=${weddingDateStr}/${weddingEnd}&details=Herman+%26+Melissa+are+getting+married%21+Villa+Ermyoni%2C+Greece&location=Villa+Ermyoni%2C+Porto+Heli%2C+Greece`;
 document.getElementById('gcalBtn').href = gcalUrl;
 
 const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-DTSTART:20270529T160000Z
-DTEND:20270602T120000Z
+DTSTART:20270610T160000Z
+DTEND:20270614T120000Z
 SUMMARY:HerMel Wedding 💍
 DESCRIPTION:Herman & Melissa are getting married! Villa Ermyoni, Greece.
 LOCATION:Villa Ermyoni, Porto Heli, Greece
