@@ -232,6 +232,8 @@ form{max-width:520px}
 .radio-row label{flex:1;min-width:120px;cursor:pointer;text-align:center;background:var(--paper);color:var(--ink);padding:.85rem;border-radius:12px;letter-spacing:0;text-transform:none;font-family:'Fraunces',serif;font-size:1rem;margin:0;border:3px solid transparent;transition:.2s}
 .radio-row input{display:none}
 .radio-row label:has(input:checked){border-color:var(--hot);background:var(--lime);font-weight:900}
+.day-picks label{background:#e2e5e0;color:#7a8079;border-color:transparent;min-width:90px;padding:.7rem .5rem}
+.day-picks label:has(input:checked){background:#3ba55c;border-color:#2a8548;color:#fff;font-weight:900}
 .btn{width:100%;padding:1.1rem;border:none;border-radius:99px;cursor:pointer;background:var(--hot);color:var(--paper);font-family:'Fraunces',serif;font-weight:900;font-size:1.25rem;box-shadow:6px 6px 0 var(--lime);transition:.15s}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--lime)}
 .btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--lime)}
@@ -574,6 +576,9 @@ footer a{color:var(--hot);text-decoration:none}
       beds, and bottles of wine accordingly. (Yes  -  this goes straight into a
       spreadsheet. You know us.)
     </p>
+    <p class="lead reveal reveal-delay-2">
+      We'd really appreciate it if you could get your RSVP in within the <strong>next two weeks</strong> though  -  it helps us start locking in all the details come September!
+    </p>
     <p class="form-progress" id="formProgress"></p>
     <form id="rsvpForm" class="reveal reveal-delay-3">
       <div class="field">
@@ -609,6 +614,17 @@ footer a{color:var(--hot);text-decoration:none}
           <div class="field">
             <label>Dietary needs / allergies</label>
             <input type="text" name="entry.1190734610" placeholder="veggie, gluten-free, no mushrooms…">
+          </div>
+          <div class="field">
+            <label>Which days will you be with us?</label>
+            <div class="radio-row day-picks" style="flex-wrap:wrap">
+              <label><input type="checkbox" class="day-item" name="entry.177050420" value="Wed 9 June" checked><span>Wed 9</span></label>
+              <label><input type="checkbox" class="day-item" name="entry.177050420" value="Thu 10 June" checked><span>Thu 10</span></label>
+              <label><input type="checkbox" class="day-item" name="entry.177050420" value="Fri 11 June (Ceremony)" checked><span>Fri 11 💍</span></label>
+              <label><input type="checkbox" class="day-item" name="entry.177050420" value="Sat 12 June" checked><span>Sat 12</span></label>
+              <label><input type="checkbox" class="day-item" name="entry.177050420" value="Sun 13 June" checked><span>Sun 13</span></label>
+            </div>
+            <p class="note" style="margin-top:.5rem">All ticked by default  -  untick any days you won't make it for.</p>
           </div>
         </div>
         <div class="field">
@@ -841,6 +857,7 @@ const noteLabel = document.getElementById('noteLabel');
 const noteField = document.getElementById('noteField');
 const submitBtn = document.getElementById('submitBtn');
 const formProgress = document.getElementById('formProgress');
+const dayItemInputs = document.querySelectorAll('.day-item');
 let attending = null;
 
 document.querySelectorAll('input[name="entry.1004697061"]').forEach(radio=>{
@@ -851,6 +868,7 @@ document.querySelectorAll('input[name="entry.1004697061"]').forEach(radio=>{
     if(attending==='🎉 Yes!'){
       yesOnly.style.display='block';
       guestsField.setAttribute('required','');
+      dayItemInputs.forEach(d=>d.disabled=false);
       noteLabel.textContent='Anything else? (optional)';
       noteField.placeholder='messages, questions, jokes…';
       submitBtn.textContent='Send our RSVP ✦';
@@ -859,6 +877,7 @@ document.querySelectorAll('input[name="entry.1004697061"]').forEach(radio=>{
     } else {
       yesOnly.style.display='none';
       guestsField.removeAttribute('required');
+      dayItemInputs.forEach(d=>d.disabled=true);
       noteLabel.textContent='Leave us a note (optional)';
       noteField.placeholder="we'd still love to hear from you…";
       submitBtn.textContent='Send our reply 💌';
