@@ -413,7 +413,7 @@ footer a{color:var(--hot);text-decoration:none}
         <span class="ico">📍</span>
         <h3>The Venue</h3>
         <p>Hydra Bay Resort <br>Greece 🇬🇷</p>
-        <span class="mono"><a href="https://maps.app.goo.gl/g2aUC9MKifCB3SP29" target="_blank" style="color:var(--hot)">Open in Maps ↗</a></span>
+        <span class="mono"><a href="https://maps.app.goo.gl/g2aUC9MKifCB3SP29" target="_blank" id="venueMapsBtn" style="color:var(--hot)">Open in Maps ↗</a></span>
       </div>
       <div class="card reveal reveal-delay-2">
         <span class="ico">📅</span>
@@ -804,6 +804,16 @@ if (isAndroid) {
 } else {
   document.getElementById('gcalBtn').href = gcalUrl;
   document.getElementById('gcalBtn').target = '_blank';
+}
+
+/* ════════ VENUE MAPS LINK ════════ */
+const venueMapsUrl = "https://maps.app.goo.gl/g2aUC9MKifCB3SP29";
+if (isAndroid) {
+  // Hand off directly to the Google Maps app package via an Android Intent,
+  // falling back to the normal web link if the Maps app isn't installed.
+  const mapsIntentTarget = venueMapsUrl.replace(/^https?:\/\//, '');
+  document.getElementById('venueMapsBtn').href =
+    `intent://${mapsIntentTarget}#Intent;scheme=https;package=com.google.android.apps.maps;S.browser_fallback_url=${encodeURIComponent(venueMapsUrl)};end`;
 }
 
 const icsContent = `BEGIN:VCALENDAR
