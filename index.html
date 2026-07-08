@@ -361,7 +361,7 @@ footer a{color:var(--hot);text-decoration:none}
         <p class="lead">
           Three years of travelling the world together, one shared Excel finance
           sheet we genuinely consider <em>entertainment</em>, and a long list of
-          "big plans"  -  Herman and Melissa are making it official.<br><br>
+          "big plans" later  -  Herman and Melissa are making it official.<br><br>
           Our parents have called us the lovebirds for years. In June 2027, on a
           Greek beach, we're finally giving them a reason to put it on a cake.<br><br>
           <span class="joke">We currently live in the Netherlands. Emphasis on
@@ -394,7 +394,7 @@ footer a{color:var(--hot);text-decoration:none}
       <div class="card reveal reveal-delay-2">
         <span class="ico">📅</span>
         <h3>The Dates</h3>
-        <p>10-11-12-13-14 June 2027<br>A four-nights wedding holiday</p>
+        <p>9-10-11-12-13 June 2027<br>A four-nights wedding holiday</p>
       </div>
       <div class="card reveal reveal-delay-3">
         <span class="ico">✈️</span>
@@ -425,27 +425,27 @@ footer a{color:var(--hot);text-decoration:none}
     <h2 class="reveal reveal-delay-1">Five days of HerMel</h2>
     <div class="timeline">
       <div class="event reveal reveal-delay-1">
-        <p class="when">DAY 1 · ARRIVALS</p>
+        <p class="when">WEDNESDAY 9 JUNE · ARRIVALS</p>
         <h3>Land &amp; Unwind 🛬</h3>
         <p>Everyone trickles in, drops their bags, and we kick things off with a mini evening gathering. Low effort, high fun.</p>
       </div>
       <div class="event reveal reveal-delay-2">
-        <p class="when">DAY 2 · THE CALM (+ A LITTLE ADVENTURE)</p>
+        <p class="when">THURSDAY 10 JUNE · THE CALM (+ A LITTLE ADVENTURE)</p>
         <h3>Chill, Prep &amp; Hydra Bachelor/ette 🛥️🍹</h3>
         <p>A lazy morning for most  -  beach, snacks, and gentle wedding prep. In the afternoon, we hop on a boat over to Hydra island for a proper bachelor/ette send-off: cobblestone lanes, seaside cocktails, and toasting to Melissa & Herman before the big day.</p>
       </div>
       <div class="event reveal reveal-delay-3">
-        <p class="when">DAY 3 · THE BIG ONE</p>
+        <p class="when">FRIDAY 11 JUNE · THE BIG ONE</p>
         <h3>Ceremony &amp; Party 💍</h3>
         <p>The main event. Vows, happy tears, dinner, and dancing until the sun has serious questions about our stamina.</p>
       </div>
       <div class="event reveal reveal-delay-4">
-        <p class="when">DAY 4 · THE WIND-DOWN</p>
+        <p class="when">SATURDAY 12 JUNE · THE WIND-DOWN</p>
         <h3>Recovery Mode 🥐</h3>
         <p>One more easy day all together. Sunglasses on, late breakfasts, and stories from the night before.</p>
       </div>
       <div class="event reveal reveal-delay-5">
-        <p class="when">DAY 5 · THE GOODBYE</p>
+        <p class="when">SUNDAY 13 JUNE · THE GOODBYE</p>
         <h3>One Last Sunrise &amp; Safe Travels 🧡</h3>
         <p>Coffee on the terrace, one final swim, and suitcases that somehow weigh more than when you arrived (souvenirs, we don't judge). We'll wave you off from the villa with hugs, playlists to remember us by, and an open invitation to come back anytime. Thank you for being part of our best days.</p>
       </div>
@@ -678,8 +678,8 @@ document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('
 // Activities are now bundled automatically on RSVP submit.
 
 /* ════════ COUNTDOWN ════════ */
-const WEDDING_DATE = new Date("2027-06-10T16:00:00");
-const WEDDING_END = new Date("2027-06-14T12:00:00");
+const WEDDING_DATE = new Date("2027-06-09T16:00:00");
+const WEDDING_END = new Date("2027-06-13T12:00:00");
 let countdownTimer = null;
 function tick(){
   const now=new Date(),gap=WEDDING_DATE-now;
@@ -753,16 +753,16 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* ════════ CALENDAR BUTTONS ════════ */
-const weddingDateStr = '20270610';
-const weddingEnd = '20270615';
+const weddingDateStr = '20270609';
+const weddingEnd = '20270614';
 const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=HerMel+Wedding+%F0%9F%92%8D&dates=${weddingDateStr}/${weddingEnd}&details=Herman+%26+Melissa+are+getting+married%21+Hydra+Bay+Resort+-+VIP+Beach+Villas%2C+Hydra%2C+Greece&location=Hydra+Bay+Resort+-+VIP+Beach+Villas%2C+Hydra%2C+Greece`;
 document.getElementById('gcalBtn').href = gcalUrl;
 
 const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-DTSTART:20270610T160000Z
-DTEND:20270614T120000Z
+DTSTART:20270609T160000Z
+DTEND:20270613T120000Z
 SUMMARY:HerMel Wedding 💍
 DESCRIPTION:Herman & Melissa are getting married! Hydra Bay Resort - VIP Beach Villas\\, Hydra\\, Greece.
 LOCATION:Hydra Bay Resort - VIP Beach Villas\\, Hydra\\, Greece
