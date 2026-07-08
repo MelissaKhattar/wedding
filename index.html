@@ -433,7 +433,7 @@ footer a{color:var(--hot);text-decoration:none}
       </div>
     </div>
     <div class="cal-btns reveal">
-      <a class="cal-btn" id="gcalBtn" href="#" target="_blank">📅 Add to Google Calendar</a>
+      <a class="cal-btn" id="gcalBtn" href="#">📅 Add to Google Calendar</a>
       <a class="cal-btn" id="icalBtn" href="#" download="HerMel-Wedding.ics">📆 Add to Apple/Outlook Calendar</a>
     </div>
   </div>
@@ -794,7 +794,17 @@ window.addEventListener('scroll',()=>{
 const weddingDateStr = '20270609';
 const weddingEnd = '20270614';
 const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=HerMel+Wedding+%F0%9F%92%8D&dates=${weddingDateStr}/${weddingEnd}&details=Herman+%26+Melissa+are+getting+married%21+Hydra+Bay+Resort+-+VIP+Beach+Villas%2C+Hydra%2C+Greece&location=Hydra+Bay+Resort+-+VIP+Beach+Villas%2C+Hydra%2C+Greece`;
-document.getElementById('gcalBtn').href = gcalUrl;
+const isAndroid = /Android/i.test(navigator.userAgent);
+if (isAndroid) {
+  // Strip the scheme so it can be handed to the Calendar app package directly via an Android Intent,
+  // falling back to the normal web link if the Calendar app isn't installed.
+  const intentTarget = gcalUrl.replace(/^https?:\/\//, '');
+  document.getElementById('gcalBtn').href =
+    `intent://${intentTarget}#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url=${encodeURIComponent(gcalUrl)};end`;
+} else {
+  document.getElementById('gcalBtn').href = gcalUrl;
+  document.getElementById('gcalBtn').target = '_blank';
+}
 
 const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
