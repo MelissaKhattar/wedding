@@ -453,25 +453,6 @@ footer a{color:var(--hot);text-decoration:none}
   </div>
 </section>
 
-<!-- ═══════════ ACTIVITIES ═══════════ -->
-<section class="activities" id="activities">
-  <div class="wrap">
-    <span class="tag reveal">Choose your adventure</span>
-    <h2 class="reveal reveal-delay-1">What should we do together?</h2>
-    <p class="lead reveal reveal-delay-2">Tick anything that sounds fun — we'll bundle your picks into your RSVP automatically when you hit send.</p>
-    <div class="activities-list reveal reveal-delay-3">
-      <label class="activity-item"><input type="checkbox" value="Hydra Island boat trip"><span>🛥️ Hydra Island boat trip</span></label>
-      <label class="activity-item"><input type="checkbox" value="Snorkeling"><span>🤿 Snorkeling</span></label>
-      <label class="activity-item"><input type="checkbox" value="Sunrise hike"><span>🥾 Sunrise hike</span></label>
-      <label class="activity-item"><input type="checkbox" value="Beach volleyball tournament"><span>🏐 Beach volleyball tournament</span></label>
-      <label class="activity-item"><input type="checkbox" value="Greek cooking class"><span>🍳 Greek cooking class</span></label>
-      <label class="activity-item"><input type="checkbox" value="Local wine tasting"><span>🍷 Local wine tasting</span></label>
-      <label class="activity-item"><input type="checkbox" value="Karaoke night"><span>🎤 Karaoke night</span></label>
-      <label class="activity-item"><input type="checkbox" value="Game &amp; cards night"><span>🎲 Game &amp; cards night</span></label>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ DRESS CODE ═══════════ -->
 <section class="dress" id="dress">
   <div class="wrap">
@@ -565,6 +546,25 @@ footer a{color:var(--hot);text-decoration:none}
   </div>
 </section>
 <div class="song-toast" id="songToast" role="status" aria-live="polite"></div>
+
+<!-- ═══════════ ACTIVITIES ═══════════ -->
+<section class="activities" id="activities">
+  <div class="wrap">
+    <span class="tag reveal">Choose your adventure</span>
+    <h2 class="reveal reveal-delay-1">What should we do together?</h2>
+    <p class="lead reveal reveal-delay-2" style="margin:0 auto;text-align:center">Tick anything that sounds fun — we'll bundle your picks into your RSVP automatically when you hit send.</p>
+    <div class="activities-list reveal reveal-delay-3">
+      <label class="activity-item"><input type="checkbox" value="Hydra Island boat trip"><span>🛥️ Hydra Island boat trip</span></label>
+      <label class="activity-item"><input type="checkbox" value="Snorkeling"><span>🤿 Snorkeling</span></label>
+      <label class="activity-item"><input type="checkbox" value="Sunrise hike"><span>🥾 Sunrise hike</span></label>
+      <label class="activity-item"><input type="checkbox" value="Beach volleyball tournament"><span>🏐 Beach volleyball tournament</span></label>
+      <label class="activity-item"><input type="checkbox" value="Greek cooking class"><span>🍳 Greek cooking class</span></label>
+      <label class="activity-item"><input type="checkbox" value="Local wine tasting"><span>🍷 Local wine tasting</span></label>
+      <label class="activity-item"><input type="checkbox" value="Karaoke night"><span>🎤 Karaoke night</span></label>
+      <label class="activity-item"><input type="checkbox" value="Game &amp; cards night"><span>🎲 Game &amp; cards night</span></label>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════════ RSVP ═══════════ -->
 <section class="rsvp" id="rsvp">
@@ -755,7 +755,7 @@ window.addEventListener('scroll',()=>{
 /* ════════ CALENDAR BUTTONS ════════ */
 const weddingDateStr = '20270610';
 const weddingEnd = '20270615';
-const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=HerMel+Wedding+%F0%9F%92%8D&dates=${weddingDateStr}/${weddingEnd}&details=Herman+%26+Melissa+are+getting+married%21+Villa+Ermyoni%2C+Greece&location=Villa+Ermyoni%2C+Porto+Heli%2C+Greece`;
+const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=HerMel+Wedding+%F0%9F%92%8D&dates=${weddingDateStr}/${weddingEnd}&details=Herman+%26+Melissa+are+getting+married%21+Hydra+Bay+Resort+-+VIP+Beach+Villas%2C+Hydra%2C+Greece&location=Hydra+Bay+Resort+-+VIP+Beach+Villas%2C+Hydra%2C+Greece`;
 document.getElementById('gcalBtn').href = gcalUrl;
 
 const icsContent = `BEGIN:VCALENDAR
@@ -764,8 +764,8 @@ BEGIN:VEVENT
 DTSTART:20270610T160000Z
 DTEND:20270614T120000Z
 SUMMARY:HerMel Wedding 💍
-DESCRIPTION:Herman & Melissa are getting married! Villa Ermyoni, Greece.
-LOCATION:Villa Ermyoni, Porto Heli, Greece
+DESCRIPTION:Herman & Melissa are getting married! Hydra Bay Resort - VIP Beach Villas\\, Hydra\\, Greece.
+LOCATION:Hydra Bay Resort - VIP Beach Villas\\, Hydra\\, Greece
 END:VEVENT
 END:VCALENDAR`;
 const icsBlob = new Blob([icsContent], {type:'text/calendar'});
